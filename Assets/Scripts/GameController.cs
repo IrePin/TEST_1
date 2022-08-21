@@ -19,13 +19,15 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject swordObject;
     [SerializeField] private GameObject barrel;
     [SerializeField] private GameObject apple;
-    [SerializeField] private GameObject BarreSpawn;
+    [SerializeField] private Transform barrelSpawn;
+    [SerializeField] private Transform hitTransformPosition;
     [SerializeField] private Animator barrelAnimator;
+    
     [SerializeField] private Transform gameOverVfxPrefab;
     [SerializeField] private Transform appleHitVfxPrefab;
     [SerializeField] private Transform HitVfxPrefab;
-        
-    private Vector3 hitTransformPosition;
+
+
     private Vector3 swordSpawnPosition;
     private Vector3 appleSpawnPosition;
 
@@ -37,7 +39,9 @@ public class GameController : MonoBehaviour
    
     private void Awake()
     {
-        hitTransformPosition = new Vector3(5, 7.6f, -10);
+        
+        hitTransformPosition.position = hitTransformPosition.gameObject.transform.position;
+        hitTransformPosition.rotation = hitTransformPosition.gameObject.transform.rotation;
         swordSpawnPosition = new Vector3(5, -3, -10);
         appleSpawnPosition = new Vector3(5, 11, -10);
         Instance = this;
@@ -48,26 +52,28 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         GameUI.SetInitialDisplayedSwordCount(SwordCount);
-        apple = Instantiate(apple, appleSpawnPosition, Quaternion.identity);
+        barrel = Instantiate(barrel, barrelSpawn.transform.position, Quaternion.Euler(90, 0, 0));
+                apple = Instantiate(apple, appleSpawnPosition, Quaternion.identity);
         apple.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         apple.transform.parent = barrel.transform;
         transform.tag = "Apple";
+       // barrel.transform.SetParent = barrelSpawn.transform;
         SpawnSword();
     }
 
     
     private IEnumerator TimeDelay()
         {
-            yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(15);
         }
 
 
     
     public void OnSuccessfulSwordHit()
     {
-        if (SwordCount > 1)
+        if (SwordCount > 0)
         {
-            Instantiate(HitVfxPrefab, hitTransformPosition, Quaternion.identity);
+            Instantiate(HitVfxPrefab, hitTransformPosition.position, Quaternion.identity);
             soundManager.PlayHit();
             Debug.Log("hit");
             SpawnSword();
@@ -82,12 +88,10 @@ public class GameController : MonoBehaviour
     }
     public void OnSuccessfulAppledHit()
     {
-        Instantiate(appleHitVfxPrefab, hitTransformPosition, Quaternion.identity);
+        Instantiate(appleHitVfxPrefab, hitTransformPosition.position, Quaternion.identity);
         Destroy(GameObject.FindWithTag("Apple"));
-             
         TimeDelay();
-
-        DontDestroyOnLoad(gameObject);
+        GameUI.ShowRestartButton();
 
     }
 
@@ -108,13 +112,15 @@ public class GameController : MonoBehaviour
     {
         if (win)
         {
-            yield return new WaitForSecondsRealtime(3f);
+            yield return null;
+            TimeDelay();
             GameUI.ShowRestartButton();
         }
         else
         {
             Instantiate(gameOverVfxPrefab, new Vector3(5, 8.8f, -10), Quaternion.identity); 
             Destroy(barrel);
+            TimeDelay();
             GameUI.ShowRestartButton();
         }
     }

@@ -19,16 +19,13 @@ public class GameUI : MonoBehaviour
     {
         restartButton.SetActive(true);
     }
-    public void NextLevelButtonButton()
-    {
-        nextLevelButton.SetActive(true);
-    }
-
+    
     public void SetInitialDisplayedSwordCount(int count)
     {
         for (int i = 0; i < count; i++)
             Instantiate(iconSword, swordPanel.transform);
     }
+
     public void SetInitialDisplayedAppleCount(int appleCount)
     {
         for (int i = 0; i < appleCount; i++)
@@ -39,10 +36,10 @@ public class GameUI : MonoBehaviour
 
     public void DecrementDisplayedSwordCount()
     {
-        if (swordIconIndexToChange <= 7)
+        if (swordIconIndexToChange <= 8)
         {
             swordPanel.transform.GetChild(swordIconIndexToChange++).GetComponent<Image>().color = usedIconSwordColor;
-            if (swordIconIndexToChange == 7)
+            if (swordIconIndexToChange == 8)
             {
                 return;
             }

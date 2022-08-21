@@ -8,7 +8,7 @@ public class SoundManager : MonoBehaviour
 
     private AudioSource[] mySource;
 
-    private AudioSource swoop;
+    private AudioSource click;
     private AudioSource hit;
 
     public void Start()
@@ -16,11 +16,12 @@ public class SoundManager : MonoBehaviour
         mySource = GetComponents<AudioSource>();
 
         hit = mySource[0];
+        click = mySource[1];
     }
 
-    public void PlaySwoop()
+    public void PlayClick()
     {
-        swoop.Play();
+        click.Play();
     }
 
     public void PlayHit()

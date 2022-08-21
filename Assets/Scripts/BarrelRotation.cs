@@ -4,14 +4,29 @@ using UnityEngine;
 
 public class BarrelRotation : MonoBehaviour
 {
-    
-    [SerializeField] private Vector3 rotation;
-    [SerializeField] private float speed;
-
        
-    void Update()
+    [SerializeField] private float speed = 10;
+    
+    private float increase;
+    private float decrease;
+
+    public void Start()
     {
-       transform.Rotate(rotation * speed * Time.deltaTime);    
+        increase = 1.2f;
+        decrease = speed / increase;
     }
 
+    void Update()
+    {
+        transform.Rotate(0, speed * Time.deltaTime, 0 );
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Sword")
+        {
+            speed *= increase;
+            Debug.Log("increase");
+        }
+    }
+   
 }

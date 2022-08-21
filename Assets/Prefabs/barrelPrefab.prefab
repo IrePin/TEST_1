@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2024100868439101191}
   - component: {fileID: 2024100869657568880}
   - component: {fileID: 2024100869657568881}
-  - component: {fileID: 2024100869657568882}
+  - component: {fileID: 797027923592579603}
   m_Layer: 0
   m_Name: barrelPrefab
   m_TagString: Barrel
@@ -28,14 +28,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024100868441100743}
-  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.010000229, y: 10.3635645, z: 0}
   m_LocalScale: {x: 50.00003, y: 50.00004, z: 50.000034}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2024100868437970375
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -120,7 +120,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 3b75355a4c2c7ab4aa69ced6f80a23bf, type: 3}
---- !u!114 &2024100869657568882
+--- !u!114 &797027923592579603
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,5 +132,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e19b37943b33cf47946630edfe53038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotation: {x: 0, y: 10, z: 0}
-  _speed: 10
+  speed: 10
