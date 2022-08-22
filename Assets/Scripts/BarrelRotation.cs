@@ -5,15 +5,18 @@ using UnityEngine;
 public class BarrelRotation : MonoBehaviour
 {
        
-    [SerializeField] private float speed = 10;
-    
-    private float increase;
-    private float decrease;
+    [SerializeField] private float speed;
+    [SerializeField] Animator animator;
 
+    public AudioSource audioSrs;
+
+    private float rotation;
+    private float increase;
+    
     public void Start()
     {
         increase = 1.2f;
-        decrease = speed / increase;
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -24,9 +27,13 @@ public class BarrelRotation : MonoBehaviour
     {
         if (other.gameObject.tag == "Sword")
         {
-            speed *= increase;
+            animator.Play("BarrelHitAnim");
+            speed = speed * increase;
             Debug.Log("increase");
+
         }
     }
-   
-}
+
+    
+    }
+

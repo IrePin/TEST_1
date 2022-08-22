@@ -2,35 +2,32 @@ using UnityEngine;
 
 public class SwordScript : MonoBehaviour
 {
-    public SoundManager SoundManager { get; private set; }
-
+    
     [SerializeField] private float speed;
     [SerializeField] GameObject sword;
 
-    private AudioSource swoop;
-       
     public bool isActive = true;
 
     private Rigidbody rb;
     private BoxCollider swordCollider;
-            
-
-       private void Awake()
+    private AudioSource swoopSource;
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         swordCollider = GetComponent<BoxCollider>();
-        swoop = GetComponent<AudioSource>();
+        swoopSource = GetComponentInChildren<AudioSource>();
     }
+
 
     public void Update()
     {
         if (Input.GetMouseButtonUp(0))
         {
             rb.AddForce(Vector3.up * 23, ForceMode.Impulse);
-            swoop.Play();
-
+            Debug.Log("input");
+            swoopSource.Play();
         }
-
+                
     }
 
     public void OnTriggerEnter(Collider other)
@@ -49,8 +46,9 @@ public class SwordScript : MonoBehaviour
 
         if (other.tag == "Apple")
         {
+           GameController.Instance.GameUI.upDisplayedAppleCount();
+           Destroy(other.gameObject);
            GameController.Instance.OnSuccessfulAppledHit();
-
         }
 
 
@@ -59,6 +57,8 @@ public class SwordScript : MonoBehaviour
             GameController.Instance.GameUI.DecrementDisplayedSwordCount();
 
             transform.SetParent(other.transform);
+            Destroy(GetComponent<SwordScript>());
+            Destroy(GetComponentInChildren<AudioSource>());
             rb.isKinematic = true;
             rb.useGravity = false;
             isActive = false;

@@ -9,9 +9,9 @@ public class GameUI : MonoBehaviour
     [SerializeField] private GameObject restartButton;
     [SerializeField] private GameObject nextLevelButton;
     [SerializeField] private GameObject swordPanel;
+    [SerializeField] private GameObject iconSword;
     [SerializeField] private GameObject applePanel;
     [SerializeField] private GameObject apple;
-    [SerializeField] private GameObject iconSword;
     [SerializeField] Color usedIconSwordColor;
 
 
@@ -28,8 +28,22 @@ public class GameUI : MonoBehaviour
 
     public void SetInitialDisplayedAppleCount(int appleCount)
     {
-        for (int i = 0; i < appleCount; i++)
+        for (int i = 0; i > appleCount; i++)
             Instantiate(apple, applePanel.transform);
+    }
+    private int appleIconIndexToChange = 3;
+
+    public void upDisplayedAppleCount()
+    {
+        if (appleIconIndexToChange <= 0)
+        {
+            Debug.Log(appleIconIndexToChange);
+            applePanel.transform.GetChild(appleIconIndexToChange++).GetComponent<Image>();
+            if (appleIconIndexToChange == 0)
+            {
+                return;
+            }
+        }
     }
 
     private int swordIconIndexToChange = 0;
@@ -39,9 +53,10 @@ public class GameUI : MonoBehaviour
         if (swordIconIndexToChange <= 8)
         {
             swordPanel.transform.GetChild(swordIconIndexToChange++).GetComponent<Image>().color = usedIconSwordColor;
-            if (swordIconIndexToChange == 8)
+            if (swordIconIndexToChange == 7)
             {
-                return;
+                Destroy(swordPanel);
+                restartButton.SetActive(true);
             }
         }
     }

@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 701306238410624474, guid: ae39e53ba9882ee47a69d4cbe23c1f0a, type: 3}
       propertyPath: m_Name
-      value: Sword_Ghost
+      value: Sword_Ghost Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae39e53ba9882ee47a69d4cbe23c1f0a, type: 3}

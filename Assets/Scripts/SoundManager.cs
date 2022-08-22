@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager Instance { get; private set; }
-
     private AudioSource[] mySource;
 
     private AudioSource click;
     private AudioSource hit;
+    private AudioSource appleHit;
+    private AudioSource win;
+
 
     public void Start()
     {
@@ -17,6 +18,8 @@ public class SoundManager : MonoBehaviour
 
         hit = mySource[0];
         click = mySource[1];
+        appleHit = mySource[2];
+        win = mySource[3];
     }
 
     public void PlayClick()
@@ -29,4 +32,13 @@ public class SoundManager : MonoBehaviour
         hit.Play();
     }
 
+    public void PlayAppleHit()
+    {
+        appleHit.Play();
+    }
+
+    public void WinHit()
+    {
+        win.Play();
+    }
 }
